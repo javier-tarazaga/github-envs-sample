@@ -54,5 +54,5 @@ jobs:
         run: npm run build
 
       - name: Echo some env variables
-          run: |
-            echo "Variable 1: ${{ env.NODE_ENV }}"
+        run: |
+          echo "Variable 1: ${{ env.NODE_ENV }}"
