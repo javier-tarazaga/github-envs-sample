@@ -73,10 +73,10 @@ jobs:
           echo "Variable 1: ${{ vars.ENV_FILE_PATH }}"
 
       - name: Load .env file
-        uses: xom9ikk/dotenv@v2
+        uses: ./.github/actions/dotenv-action
         with:
-          mode: ${{ github.event.inputs.environment }}
-          load-mode: strict
+          path: .env.${{ github.event.inputs.environment }}
+          export-variables: true
 
       - name: Build
         run: npm run build
