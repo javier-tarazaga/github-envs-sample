@@ -75,7 +75,7 @@ jobs:
       - name: Load .env file
         uses: xom9ikk/dotenv@v2
         with:
-          path: .env.${{ github.event.inputs.environment }}
+          path: .${{ github.event.inputs.environment }}
           load-mode: strict
 
       - name: Build
