@@ -73,7 +73,7 @@ jobs:
           echo "Variable 1: ${{ vars.ENV_FILE_PATH }}"
 
       - name: Load .env file
-        uses: ./.github/actions/dotenv-action
+        uses: falti/dotenv-action@v1.0.4
         with:
           path: .env.${{ github.event.inputs.environment }}
           export-variables: true
