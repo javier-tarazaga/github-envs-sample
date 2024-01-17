@@ -1,6 +1,15 @@
 name: Deploy App
 
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment Environment'
+        required: true
+        options:
+        - 'Staging'
+        - 'Production'
+        default: 'Staging'
 
 jobs:
   test:
@@ -27,6 +36,8 @@ jobs:
     name: Build and deploy
     runs-on: ubuntu-20.04
     needs: test
+    environment: ${{ github.event.inputs.environment }}
+
 
     steps:
       - name: Checkout
