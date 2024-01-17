@@ -78,6 +78,7 @@ jobs:
           path: .env.${{ github.event.inputs.environment }}
           log-variables: true
           export-variables: true
+          keys-case: upper
 
       - name: Build
         run: npm run build
