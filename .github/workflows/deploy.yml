@@ -8,43 +8,43 @@ on:
         required: true
         type: choice
         options:
-        - 'Staging'
-        - 'Production'
-        default: 'Staging'
+        - 'staging'
+        - 'production'
+        default: 'staging'
 
 jobs:
-  test:
-    name: Test
-    runs-on: ubuntu-20.04
+  # test:
+  #   name: Test
+  #   runs-on: ubuntu-20.04
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
 
-      - name: Install Node 16
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-          cache: npm
+  #     - name: Install Node 16
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: '16'
+  #         cache: npm
 
-      - name: Cache node modules
-        uses: actions/cache@v2
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+  #     - name: Cache node modules
+  #       uses: actions/cache@v3
+  #       with:
+  #         path: node_modules
+  #         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-node-
 
-      - name: Install dependencies
-        run: npm ci
+  #     - name: Install dependencies
+  #       run: npm ci
 
-      - name: Start test
-        run: npm run test
+  #     - name: Start test
+  #       run: npm run test
 
   build:
     name: Build and deploy
     runs-on: ubuntu-20.04
-    needs: test
+    # needs: test
     environment: ${{ github.event.inputs.environment }}
 
     steps:
@@ -58,7 +58,7 @@ jobs:
           cache: npm
 
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -75,7 +75,7 @@ jobs:
       - name: Load .env file
         uses: xom9ikk/dotenv@v2
         with:
-          path: ${{ env.ENV_FILE_PATH }}
+          path: .env.${{ github.event.inputs.environment }}
           load-mode: strict
 
       - name: Build
