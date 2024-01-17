@@ -76,7 +76,7 @@ jobs:
         uses: xom9ikk/dotenv@v2
         with:
           mode: ${{ github.event.inputs.environment }}
-          load-mode: path
+          load-mode: strict
 
       - name: Build
         run: npm run build
