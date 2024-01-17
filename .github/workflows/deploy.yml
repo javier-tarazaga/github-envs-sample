@@ -86,3 +86,4 @@ jobs:
       - name: Echo some env variables
         run: |
           echo "Variable 1: ${{ env.NODE_ENV }}"
+          echo "Variable 1: ${{ env.TEST_ENV }}"
